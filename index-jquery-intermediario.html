@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+    <button type="button" id="showDiv">Show DIV</button>
+    <div id="wrap" class="d-none">
+
+        <p>Emanuel</p>
+    </div>
+
+    <div id="wrap" class="wrap-2">
+
+
+
+    </div>
+
+    <fieldset>
+        <legend>Meu Formulario</legend>
+        <input type="text" name="nome" id="nome" placeholder="Digite seu nome" />
+        <br>
+        <br>
+        <input type="password" name="PWSENHA" id="SENHA" />
+        <br>
+        <br>
+        <input type="password" name="PWCONFIRMAR_SENHA" id="CONFIRMAR_SENHA" />
+        <br>
+        <br>
+        <button type="button" id="btnShowName">Mostra Nome</button>
+        <span id="widget">
+            <p></p>  <!-- colocar texto digitado no input aqui dentro -->  
+        </span>
+    </fieldset>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        const coeficiente = 3;
+
+        function getAltura(){
+            let altura = 2;
+            return  altura*coeficiente;
+        }
+
+        let elemento = $("#wrap");
+        console.log(elemento);
+        elemento.addClass("container");
+        elemento.append("<span id='widget'><p>P Teste</p></span>");
+        elemento.css("background", "yellow");
+        elemento.css("border", "5px dashed darkblue");
+
+
+
+        let btnShowDiv = $("#showDiv");
+        console.log(btnShowDiv);
+
+        btnShowDiv.on("click", function(){
+            elemento.fadeIn(3000);
+
+            $(".wrap-2").fadeOut(1000);
+            
+
+        });
+
+        $("#btnShowName").click(function(event){
+            event.preventDefault();
+            let strNome = $("#nome").val();
+            
+            $("#widget p").append($("#nome").val());
+            $("#widget p").append($("#wrap").html());
+            //$("<p>"+ strNome+"</p>").insertAfter("#widget");
+            
+
+
+        });
+
+        
+        
+
+
+        // btnShowDiv.click(function(){
+        // });
+
+        // elemento.fadeIn()
+
+
+    </script>
+
+</body>
+</html>

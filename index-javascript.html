@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="wrap">
+
+
+
+    </div>
+
+
+    <script type="text/javascript">
+        const coeficiente = 3;
+
+        function getAltura(){
+            let altura = 2;
+            return  altura*coeficiente;
+        }
+        
+        let elemento = document.getElementById("wrap");
+        console.log(elemento);
+        elemento.classList.add("container");
+        elemento.innerHTML = "<span id='widget'><p>P Teste</p></span><div></div>";
+        
+
+
+    </script>
+
+</body>
+</html>
