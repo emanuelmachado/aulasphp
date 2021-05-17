@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+
+    <form id="frm">
+        <fieldset>
+            <legend>Meu Formulario</legend>
+            <input type="text" name="nome" id="nome" placeholder="Digite seu nome" />
+            <br>
+            <br>
+            <input type="password" name="PWSENHA" id="SENHA" />
+            <br>
+            <br>
+            <input type="password" name="PWCONFIRMAR_SENHA" id="CONFIRMAR_SENHA" />
+            <br>
+            <br>
+            <button type="button" id="btnEnvia">Envia</button>
+            <span id="mensagem"></span>
+        </fieldset>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+     
+
+        $("#btnEnvia").on("click", function(event){
+            event.preventDefault();
+            
+            let strNome = $("#nome").val();
+            let strSenha = $("input[name='PWSENHA']").val();
+            let strConfirmarSenha = $("#CONFIRMAR_SENHA").val();
+
+            let isValid = validatePasswords(strSenha, strConfirmarSenha);
+            //debugger;
+          //  if(strNome.length > 0 && isValid){
+                
+
+                $.ajax({
+                    url: "http://localhost/binho/envia2.php",
+                    method: "POST",
+                    data: {nome: strNome, PWSENHA: strSenha,PWCONFIRMAR_SENHA: strConfirmarSenha },
+                    async:true,
+                    success: function(data){
+                        
+                        let objResponse = JSON.parse(data);
+
+                        let mensagem = $("#mensagem");
+                        mensagem.append(objResponse.mensagem);
+                       // alert2();
+                    }
+                });
+
+                $.ajax({
+                    url: "http://localhost/binho/envia.php",
+                    method: "POST",
+                    data: {nome: strNome, PWSENHA: strSenha,PWCONFIRMAR_SENHA: strConfirmarSenha },
+                    async:true,
+                    success: function(data){
+                        
+                        let objResponse = JSON.parse(data);
+
+                        let mensagem = $("#mensagem");
+                        mensagem.append(objResponse.mensagem);
+                        alert2();
+                    }, error: function(err){
+                        
+                    }
+                });
+              
+           // }
+            
+
+        });
+
+        function alert2(){
+            window.alert("2");
+        }
+
+        function validatePasswords(strSenha, strConfirmarSenha){
+            let mensagem = $("#mensagem");
+            let valido = false;
+
+            // if(strSenha != strConfirmarSenha){
+            //     mensagem.css("color", "red");
+            //     mensagem.append("Senhas não conferem");
+            // }else{
+            //     mensagem.css("color","initial");
+            //     mensagem.html("");   
+
+            //     if(strSenha.length < 6 || strSenha.length > 10){
+            //         mensagem.css("color", "red");
+            //         mensagem.append("A senha deve conter de 6 caracteres até no maximo 10");
+            //     }else{
+            //         valido = true;
+            //     }
+            // }
+
+            // if(strSenha != strConfirmarSenha){
+            //     mensagem.css("color", "red");
+            //     mensagem.append("Senhas não conferem");
+            // }else if((strSenha == strConfirmarSenha) && (strSenha.length < 6 || strSenha.length > 10)){
+            //     mensagem.css("color", "red");
+            //     mensagem.append("A senha deve conter de 6 caracteres até no maximo 10");
+            // }else if((strSenha == strConfirmarSenha) && (strSenha.length < 5  && strSenha.length < 11)){
+            //     mensagem.css("color","initial");
+            //     mensagem.html("");                   
+            //     valido = true;
+            // }
+            valido = true;
+
+            return valido;
+        }
+
+    </script>
+
+</body>
+</html>
